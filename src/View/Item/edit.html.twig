@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    Edit item {{ item.title }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1 class="text-center">Edit Item {{ item.title }}</h1>
+        <form action="" method="post">
+            <label for="item_title">Title</label>
+            <input id="item_title" type="text" name="title"  value="{{ item.title }}">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <a class="badge badge-secondary" href="/">Retour à la liste</a>
+    </section>
+{% endblock %}
+
+

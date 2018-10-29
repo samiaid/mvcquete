@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    Add an item
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1 class="text-center">Ajouter un Item</h1>
+        <form action="" method="post">
+            <label for="item_title">Title</label>
+            <input id="item_title" type="text" name="title">
+            <button class="btn btn-primary" type="submit">Valider</button>
+        </form>
+        <a class="badge badge-secondary" href="/">Retour à la liste</a>
+    </section>
+{% endblock %}
+
+

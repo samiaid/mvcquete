@@ -1,39 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vince
- * Date: 01/10/18
- * Time: 15:23
- */
 
 namespace Model;
 
-require __DIR__ . '/../../app/db.php';
-
-class CategoryManager
+class CategoryManager extends AbstractManager
 {
-    /**
-     * Return array with all the categories in the table category
-     * @return array
-     */
-    public function selectAllCategories() : array {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query="SELECT * FROM category";
-        $statement = $pdo->query($query);
-        return $statement->fetchAll();
+    const TABLE = 'category';
+
+    public function __construct(\PDO $pdo)
+    {
+        parent::__construct(self::TABLE, $pdo);
     }
 
-    /**
-     * Return array with all the information of one category with id = $id
-     * @param int $id
-     * @return array
-     */
-    public function selectOneCategory(int $id) : array {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM category WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        return $statement->fetch();
+    public function insert(Category $category): int
+    {
+        $statement = $this->pdo->prepare('INSERT INTO ' . self::TABLE . " (`name`) VALUES (:name)" );
+        $statement->bindValue('name', $category->getTitle(), \PDO::PARAM_STR);
+        if ($statement->execute()) {
+            return $this->pdo->lastInsertId();
+        }
     }
+
+    public function update(Category $category)
+    {
+        $statement = $this->pdo->prepare('UPDATE ' . self::TABLE . " SET `name` =:name WHERE id =:id" );
+        $statement->bindValue('id', $category->getId(), \PDO::PARAM_INT);
+        $statement->bindValue('name', $category->getName(), \PDO::PARAM_STR);
+        return $statement->execute();
+    }
+
 }

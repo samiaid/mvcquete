@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+     Item {{ item.title }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1 class="text-center">Description : {{item.title }} </h1>
+        <dl>
+            <dt>Nom : {{item.title }}</dt>
+            <dd>Id : {{ item.id }}</dd>
+            <dd> <a class="badge badge-secondary" href="/item/edit/{{ item.id }}">editer</a>
+         <a class="badge badge-danger" href="/item/delete/{{ item.id }}">supprimer</a>        </dd>
+        </dl>
+    </section>
+    <section>
+        <a class="btn btn-primary" href='/'>Retour à la liste</a>
+    </section>
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    Edit category {{ category.name }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1 class="text-center">Modifier la catégorie {{ category.name }}</h1>
+        <form action="" method="post">
+            <label for="category_name">Nom</label>
+            <input id="category_name" type="text" name="name"  value="{{ category.name}}">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <a class="badge badge-secondary" href="/categories">Retour à la liste</a>
+
+    </section>
+{% endblock %}
